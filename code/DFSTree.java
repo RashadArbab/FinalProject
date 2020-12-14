@@ -102,14 +102,9 @@ public class DFSTree {
     	}
     }
     
-    public void getTable() {
-    	
-    	System.out.println(components.size()) ; 
-        
-        System.out.println("| Size of Component | Number of components of this size |");
-        System.out.println("| --- | --- |");
-        int counter = 0; 
-        for (dfsComponent  comp : components) {  
+    
+    public void setupCompMap() {
+    	for (dfsComponent  comp : components) {  
         	int key = comp.getSize() ; 
         	if (compMap.containsKey(key)) {
         		
@@ -118,25 +113,51 @@ public class DFSTree {
         	}
         	else {
         		compMap.put(key , 1) ; 
-        		counter ++ ;
+        		
         	}
        }
+    }
+    
+    public void getTable() {
+    	
+    	System.out.println(components.size()) ; 
         
-       Map<Integer, Integer> order =  compMap; 
+        System.out.println("| Size of Component | Number of components of this size |");
+        System.out.println("| --- | --- |");
+        
+        setupCompMap() ; 
+        
+      
         
        
-       for(int key : order.keySet()) {
+       
+       for(int key : compMap.keySet()) {
         	
-        	System.out.println("| " + key + " | " + order.get(key) + " |" ) ; 
+        	System.out.println("| " + key + " | " + compMap.get(key) + " |" ) ; 
         	
        }
         	
-       System.out.println(counter); 
+       
         
     }
 
     public IntGraphList getGraph() {
         return graph;
+    }
+    
+    public double getMean() {
+    	int counter = 0; 
+    	
+    	for (int key : compMap.keySet()) {
+    		counter += key; 
+    	}
+    	
+    	double mean; 
+    	
+    	mean = (double) counter/compMap.keySet().size() ; 
+    	
+    	return mean; 
+    	
     }
 
     public int getParent(int v) {

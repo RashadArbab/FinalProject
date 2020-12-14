@@ -83,6 +83,7 @@ public class Program {
     public static void printComponentReport(DFSTree dfsTree) {
         // Report on components
     	dfsTree.getTable() ; 
+    	System.out.println(dfsTree.getMean()) ;
     	
     }
 
