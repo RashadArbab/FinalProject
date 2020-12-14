@@ -171,7 +171,7 @@ public class IntGraphList {
      * 
      * @param v the vertex to check.
      */
-    private void checkVertex(int v) {
+    private void checkVertex(int v) throws IllegalArgumentException{
         if (!hasVertex(v)) {
             throw new IllegalArgumentException("vertex " + v + " is not in the graph");
         }
