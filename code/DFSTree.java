@@ -17,7 +17,7 @@ public class DFSTree {
     
 
     private Set<Integer> visited = new HashSet<Integer>() ; 
-    private Map<Integer, Integer> parents = new HashMap<Integer, Integer>();
+    
     private Set<dfsComponent> components = new HashSet<dfsComponent>() ; 
     private Map<Integer, Integer> compMap = new TreeMap<Integer, Integer>() ; 
     private IntGraphList graph ; 
@@ -55,7 +55,6 @@ public class DFSTree {
     
     public void dfsInitialize() {
     	visited.add(source); 
-    	parents.put(source, null); 
     	dfsComponent comp = new dfsComponent() ; 
     	comp.setSource(source);
     	components.add(comp); 
@@ -149,30 +148,11 @@ public class DFSTree {
         return graph;
     }
     
-    public double getMean() {
-    	int counter = 0; 
-    	
-    	for (int key : compMap.keySet()) {
-    		counter += key; 
-    	}
-    	
-    	double mean; 
-    	
-    	mean = (double) counter/compMap.keySet().size() ; 
-    	
-    	return mean; 
-    	
-    }
 
-    public int getParent(int v) {
-        // TODO: complete this method
-    	return parents.get(v); 
-    }
 
-    //public List<Integer> getComponentSizes() {
-        // TODO: complete this method
-        //return Collections.emptyList();
-    //}
+ 
+
+   
     
  
 }

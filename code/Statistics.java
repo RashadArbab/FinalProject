@@ -63,6 +63,13 @@ public class Statistics {
         System.out.println("Stats size " + doubles.length) ;
         calculateFromList();
     } 
+    
+    public Statistics(double[] list) {
+       DescriptiveStatistics stats = new DescriptiveStatistics(list); 
+       this.stats = stats; 
+       calculateFromList() ;
+
+    }
 
     /**
      * This method calculates the min, max, mean, Q1, Q2,

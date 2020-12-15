@@ -17,7 +17,7 @@ public class Program {
     public static void main(String[] args)
             throws IOException {
         /* TODO: change this source to your actor ID */
-        int source =286726 ; // 102 = Kevin Bacon //286726
+        int source = 286726 ; // 102 = Kevin Bacon //286726
 
         /*
          * TODO: create several sample adjacency lists in
@@ -59,13 +59,13 @@ public class Program {
          graph.addEdge(4, 1);
          graph.addEdge(4, 3);
 		*/ 
-        DFSTree dfsTree = new DFSTree(graph ,source);
-        printComponentReport(dfsTree);
+        //DFSTree dfsTree = new DFSTree(graph ,source);
+        //printComponentReport(dfsTree);
         
-        /*
+        
         BFSTree bfsTree = new BFSTree(graph, source);
         printPathReport(bfsTree);
-
+/*
         System.out.println("Source,Fraction,Mean Distance");
         var allSources = new ArrayList<>(graph.getVertices());
         Collections.shuffle(allSources);
@@ -78,7 +78,7 @@ public class Program {
         //System.out.println("Path Report");
         //printPathReport(bfsTree); 
         */ 
-        System.out.println("Number of components:" +  dfsTree.numComponents()); 
+        //System.out.println("Number of components:" +  dfsTree.numComponents()); 
 
     }
 
@@ -91,11 +91,21 @@ public class Program {
     }
 
     public static void printPathReport(BFSTree bfsTree) {
-        //for (int vertex: bfsTree.getGraph().getVertices()) {
-        	//System.out.println("distance to " + vertex + ": " +  bfsTree.getDistanceTo(vertex)); 
-        //}
+    	double num = 0 ; 
+    	double den = bfsTree.getGraph().getNumVertices() -1; 
+        for (int vertex: bfsTree.getGraph().getVertices()) {
+        	int dist = bfsTree.getDistanceTo(vertex); 
+        	if (dist > 0) {
+        		num ++; 
+        			//System.out.println("distance to " + vertex + ": " +  bfsTree.getDistanceTo(vertex)); 
+        	}
+        			
+        }
+        System.out.println(num);
+        System.out.println(den); 
+        System.out.println((num/den)); 
     	
-    	
+    	Statistics stats  = new Statistics(bfsTree.getDoubleDistances());
     }
 
     public static void printSimplePathReport(BFSTree bfsTree) {
