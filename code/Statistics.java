@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics ;
+
 
 /**
  * This class is a helper class for calculating statistics
@@ -35,6 +38,7 @@ public class Statistics {
     private double q1;
     private double q2;
     private double q3;
+    private DescriptiveStatistics stats; 
 
     /**
      * Constructs a new Statistics object based on a list of
@@ -45,9 +49,20 @@ public class Statistics {
      * @param list the list of integers to collect
      *             statistics from.
      */
-    public Statistics(List<Integer> list) {
-        calculateFromList(list);
-    }
+    public Statistics(Set<dfsComponent> list) {
+        
+        double[] doubles = new double[list.size()] ; 
+        int counter = 0; 
+        for (dfsComponent comps : list) {
+        	doubles[counter] = comps.getSize(); 
+        	counter++ ; 
+        }
+        DescriptiveStatistics stats = new DescriptiveStatistics(doubles) ; 
+        this.stats = stats ;
+        
+        System.out.println("Stats size " + doubles.length) ;
+        calculateFromList();
+    } 
 
     /**
      * This method calculates the min, max, mean, Q1, Q2,
@@ -58,7 +73,7 @@ public class Statistics {
      * @param list a list of unsorted integers, with
      *             possible repeated values.
      */
-    private void calculateFromList(List<Integer> list) {
+    private void calculateFromList() {
         /*
          * TODO: complete this method!
          * 
@@ -67,6 +82,12 @@ public class Statistics {
          * values, as well as populated the counts HashMap
          * with the counts of each value.
          */
+    	System.out.println("Min: " + getMin()); 
+    	System.out.println("Max: " + getMax());
+    	System.out.println("Mean: " + getMean()); 
+    	System.out.println("Q1: " + getQ1()); 
+    	System.out.println("Q2: " + getQ2()); 
+    	System.out.println("Q3: " + getQ3()); 
     }
 
     /**
@@ -100,7 +121,7 @@ public class Statistics {
      * @return the minimum value from the list
      */
     public int getMin() {
-        return min;
+        return (int) stats.getMin(); 
     }
 
     /**
@@ -109,7 +130,7 @@ public class Statistics {
      * @return the maximum value from the list
      */
     public int getMax() {
-        return max;
+        return (int)  stats.getMax() ;
     }
 
     /**
@@ -118,7 +139,7 @@ public class Statistics {
      * @return the mean value from the list
      */
     public double getMean() {
-        return mean;
+    	return  stats.getMean(); 
     }
 
     /**
@@ -127,7 +148,7 @@ public class Statistics {
      * @return the first quartile value from the list
      */
     public double getQ1() {
-        return q1;
+        return stats.getPercentile(25); 
     }
 
     /**
@@ -137,7 +158,7 @@ public class Statistics {
      * @return the first quartile value from the list
      */
     public double getQ2() {
-        return q2;
+        return stats.getPercentile(50) ; 
     }
 
     /**
@@ -146,6 +167,6 @@ public class Statistics {
      * @return the third quartile value from the list
      */
     public double getQ3() {
-        return q3;
+        return stats.getPercentile(75); 
     }
 }

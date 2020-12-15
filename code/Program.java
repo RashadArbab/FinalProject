@@ -2,7 +2,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set; 
 
 public class Program {
     /**
@@ -83,7 +85,8 @@ public class Program {
     public static void printComponentReport(DFSTree dfsTree) {
         // Report on components
     	dfsTree.getTable() ; 
-    	System.out.println(dfsTree.getMean()) ;
+    	
+    	Statistics stats = new Statistics(dfsTree.getComponents()) ; 
     	
     }
 

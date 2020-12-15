@@ -15,7 +15,7 @@ public class DFSTree {
     
     // TODO: create the isConnected method
     
-    private Map<Integer, LinkedList<Integer>> adjList ; 
+
     private Set<Integer> visited = new HashSet<Integer>() ; 
     private Map<Integer, Integer> parents = new HashMap<Integer, Integer>();
     private Set<dfsComponent> components = new HashSet<dfsComponent>() ; 
@@ -48,6 +48,10 @@ public class DFSTree {
     	}
     }
     */ 
+    
+    public Set<dfsComponent> getComponents() {
+    	return this.components; 
+    }
     
     public void dfsInitialize() {
     	visited.add(source); 
