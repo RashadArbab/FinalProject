@@ -11,20 +11,27 @@ public class BFSTree {
     private HashMap<Integer, Integer> parents = new HashMap<Integer , Integer>() ;  
     private TreeMap<Integer, Integer> setOfDistances  = new TreeMap<Integer, Integer>(); 
     
-
+    /**
+     * same bfs search as before 
+     * @param graph
+     * @param source
+     */
     public BFSTree(IntGraphList graph, int source) {
         this.graph = graph;
         this.source = source;
         
         initialize() ; 
         
-        getTable(); 
+        //getTable(); 
 
       
     }
     
 
-  
+    /**
+     * initializes the bfs and runs the search itself so when an instance of bfsTree is created 
+     * it automatically searches and has the important information ready for use. 
+     */
     private void initialize() {
     	
     	for(Integer node : graph.getVertices()) {
@@ -57,7 +64,11 @@ public class BFSTree {
     
     
 
-    
+    /**
+     * prints the table housing distance from source and the number of actors 
+     * that are that distance from the source 
+     * 
+     */
     public void getTable() {
     	 
    
@@ -77,6 +88,12 @@ public class BFSTree {
          }
     }
     
+    /**
+     * for the apache commons DescriptiveStatistics to work it needs an array of doubles not a set of integers 
+     * so this method takes the set of distance.values 
+     * and it puts them into an array of doubles which the DescriptiveStatistics class can read
+     * @return an array fo doubles from distances.values
+     */
     public double[] getDoubleDistances() {
     	ArrayList<Integer> ints  = new ArrayList<Integer>(); 
     	int counter = 0; 
@@ -103,17 +120,42 @@ public class BFSTree {
         return distances.get(v);
     }
 
+    /**
+     * useless method 
     public int getParent(int v) {
         // TODO: complete this method
         return parents.get(v); 
         
     }
-
+	*/ 
     public IntGraphList getGraph() {
         return graph;
     }
     
+    /**
+     * this method is for finding the percent of your component that is within 6 degrees of freedom from you 
+     * if greater than 0.5 you are within 6 degrees of freedom to everyone else in your component 
+     * @return
+     */
+    public double getBacon() {
+    	double num = 0 ; 
+    	double den = distances.keySet().size(); 
+    	
+    	for(int value : distances.values()) {
+    		if (value >= 0 && value <=7) {
+    			num ++; 
+    		}
+    	}
+    	//System.out.println(num/den); 
+    	return num/den ; 
+    }
     
+    /**
+     * @return the distance from the source to kevin bacon 
+     */
+    public int distanceToBacon() {
+    	return getDistanceTo(102)  ; 
+    }
 
     public int getSource() {
         return source;

@@ -41,12 +41,19 @@ public class Statistics {
     private DescriptiveStatistics stats; 
 
     /**
+     * FOR DFS ONLY 
+     * 
+     * 
      * Constructs a new Statistics object based on a list of
-     * integers. This class doesn't store the integers, but
+     * components. This class doesn't store the integers, but
      * instead calculates the min, max, Q1-Q3, and counts
      * the number of occurrences of each value.
+     * 
+     * It takes the set of components and their sizes, 
+     * turns them into an array of doubles
+     * uses the array to create an  instance of DescriptiveStatistics 
      *
-     * @param list the list of integers to collect
+     * @param list the list of components to collect
      *             statistics from.
      */
     public Statistics(Set<dfsComponent> list) {
@@ -64,10 +71,17 @@ public class Statistics {
         calculateFromList();
     } 
     
+    /**
+     * FOR BFS ONLY 
+     * 
+     * accepts an array of doubles and creates instances of DescirptiveStatistics with them
+     * 
+     * @param list
+     */
     public Statistics(double[] list) {
        DescriptiveStatistics stats = new DescriptiveStatistics(list); 
        this.stats = stats; 
-       calculateFromList() ;
+       //calculateFromList() ;
 
     }
 
@@ -89,42 +103,52 @@ public class Statistics {
          * values, as well as populated the counts HashMap
          * with the counts of each value.
          */
-    	System.out.println("Min: " + getMin()); 
-    	System.out.println("Max: " + getMax());
-    	System.out.println("Mean: " + getMean()); 
-    	System.out.println("Q1: " + getQ1()); 
-    	System.out.println("Q2: " + getQ2()); 
-    	System.out.println("Q3: " + getQ3()); 
+    	//System.out.println("Min: " + getMin()); 
+    	//System.out.println("Max: " + getMax());
+    	//System.out.println("Mean: " + getMean()); 
+    	//System.out.println("Q1: " + getQ1()); 
+    	//System.out.println("Q2: " + getQ2()); 
+    	//System.out.println("Q3: " + getQ3()); 
     }
 
     /**
+     * NOT USED I wouldnt dream of sorting an arraylist. way better to put it into a tree map in linearithmic time
+     * than to sort in quadratic time. 
+     * 
      * Returns a list of ordered unique values based on the
      * original list with duplicates.
+     * 
+     * 
      *
      * @return a list of ordered unique values based on the
      *         original list with duplicates
      */
+    /*
     public List<Integer> getSortedUniqueKeys() {
         ArrayList<Integer> keys = new ArrayList<>(
                 counts.keySet());
         Collections.sort(keys);
         return keys;
     }
+    */
 
     /**
+     * Not used 
+     * 
      * Returns the number of occurrences of a specific
      * value.
      *
      * @param value the value to check for occurrences
      * @return the number of occurrences
-     */
+     
     public int getCountOf(int value) {
         return counts.get(value);
     }
+    */
 
+    //These all use the DescriptiveStats object to find the given values 
+    
     /**
-     * Returns the minimum value from the list.
-     *
      * @return the minimum value from the list
      */
     public int getMin() {
@@ -132,8 +156,6 @@ public class Statistics {
     }
 
     /**
-     * Returns the maximum value from the list.
-     *
      * @return the maximum value from the list
      */
     public int getMax() {
@@ -141,8 +163,6 @@ public class Statistics {
     }
 
     /**
-     * Returns the mean value from the list.
-     *
      * @return the mean value from the list
      */
     public double getMean() {
@@ -150,8 +170,6 @@ public class Statistics {
     }
 
     /**
-     * Returns the first quartile value from the list.
-     *
      * @return the first quartile value from the list
      */
     public double getQ1() {
@@ -159,9 +177,6 @@ public class Statistics {
     }
 
     /**
-     * Returns the second quartile (a.k.a. median) value
-     * from the list.
-     *
      * @return the first quartile value from the list
      */
     public double getQ2() {
@@ -169,8 +184,6 @@ public class Statistics {
     }
 
     /**
-     * Returns the third quartile value from the list.
-     *
      * @return the third quartile value from the list
      */
     public double getQ3() {
